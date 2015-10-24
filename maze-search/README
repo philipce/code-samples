@@ -3,7 +3,7 @@ information on customizing some of the module functionality. The program
 can be run under default settings on the supplied maze layout as shown 
 below.
 
-    Example:
+    Example:s
 
         $ python MazeSearch.py maps/map0.txt
 
