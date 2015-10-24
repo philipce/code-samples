@@ -19,4 +19,7 @@ MATLAB
 ====================
 * kalman-filter: Kalman filter for 2D projectile tracking.
 
-
+====================
+Python
+====================
+* maze-search: Various search algorithms used to solve 2D mazes. 
