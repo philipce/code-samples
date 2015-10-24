@@ -1,0 +1,22 @@
+This repository contains various projects that I think are suitable as code
+samples--not too large, self contained, and not overly complex while still 
+being (hopefully) interesting and non-trivial.
+
+Some of the projects were inspired by college assignments, others by work 
+projects, though many are just things I've hacked up for fun. It's worth 
+noting that none of these sample projects belong to anyone else (e.g. no 
+previous employer would be upset to find these online). My intent is that 
+these samples give an idea of the kind of code that I enjoy writing and my 
+facility with different programming languages.
+
+Each project is contained in its own directory within this repository. 
+Details on each project can be found in its respective README. Below is a
+brief overview of the projects, organized by language (projects written
+in multiple languages are listed under multiple headings).
+
+====================
+MATLAB
+====================
+* kalman-filter: Kalman filter for 2D projectile tracking.
+
+
