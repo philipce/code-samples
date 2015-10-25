@@ -19,7 +19,7 @@ on the included training data and report results on the test data.
 The decision tree methods are generic enough to be usable with input data
 of arbitrary dimension, though labels must either be 'positive' or 
 'negative'. Supplying different data would require either writing one's 
-own driver, or modifying 'main' slightly to match the given data.
+own driver function, or modifying 'main' slightly to match the given data.
 
 Testing for this module was performed by running the main method on 
 a few different training/test sets of varying dimensions and sizes and
