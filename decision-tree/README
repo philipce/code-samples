@@ -1,0 +1,26 @@
+This module provides code to construct a decision tree for binary 
+classification and query the tree to make predictions. Tree structure is 
+learned using the ID3 algorithm. 
+
+Training/test data is provided for tic-tac-toe boards. For this case, the
+decision tree tries to learn the outcome of the game based on the current 
+board state. Each data point has 9 features, 1 for each of the squares on 
+the board. These features can be 'x', 'o', or 'b' (blank). The outcomes 
+are either 'positive' or 'negative', where a win for player x is positive
+and a win for player o is negative.
+
+The module defines a main method that can be invoked to perform learning 
+on the included training data and report results on the test data.
+
+    Example:
+    
+        $ python DecisionTree.py
+
+The decision tree methods are generic enough to be usable with input data
+of arbitrary dimension, though labels must either be 'positive' or 
+'negative'. Supplying different data would require either writing one's 
+own driver, or modifying 'main' slightly to match the given data.
+
+Testing for this module was performed by running the main method on 
+a few different training/test sets of varying dimensions and sizes and
+comparing results against results obtained by hand computation.
