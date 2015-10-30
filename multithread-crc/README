@@ -1,0 +1,17 @@
+This project implements a multithreaded program that computes the checksum
+of each file in a given directory. For each file in the directory, the 
+file name and checksum are printed to the console, sorted alphabetically. 
+
+The checksum function used is CRC32 (which is not my implementation--see 
+crc.c for info). Error is printed for files that can't be read. 
+
+The user must specify the directory name and the number of threads to 
+spawn as command-line arguments. Directories inside the target directory 
+are skipped. User can specify between 1-99 worker threads.
+
+A makefile is included with the project to build program, 'run_crc'.
+
+Example:
+
+    $ make
+    $ ./run_crc path/to/dir 5
