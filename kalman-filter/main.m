@@ -14,8 +14,8 @@ dt = .1; % simulation time step in seconds
 t_max = 35; % max simulation time in seconds
 obs_freq = .35; % frequency with which time steps are observed, range [0,1]
 g = 9.8; % gravitational acceleration in m/s^2
-r = 6; % transition noise; increase for faster response to observations
-q = 1000; % observation noise; increase for greater observation spread 
+r = 8; % transition uncertainty; increase for fast response to obs
+q = 2000; % observation noise; increase for greater observation spread 
 
 % get system dynamics model for idealized 2D projectile
 sys = projectile_model(dt, g, r, q);
@@ -65,7 +65,9 @@ legend('Actual trajectory', 'Ideal model trajectory', 'Belief', ...
        'Observations', 'Location', 'northwest');
 xlabel('X Position (m)');
 ylabel('Y Position (m)');
-axis([0, max(actual_x)*1.5, 0, max(actual_y)*1.5]);
+x_axis_lim = max(actual_states(1, 1:plot_end))*2;
+y_axis_lim = max(actual_states(2, 1:plot_end))*2;
+axis([0, x_axis_lim, 0, y_axis_lim]);
 
 
 
