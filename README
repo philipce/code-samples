@@ -16,7 +16,7 @@ noted in the documentatino. Below is a brief overview of the projects,
 organized by language (projects written in multiple languages are listed
 under multiple headings).
 
-====================
+===================
 C
 ====================
 * multi-thread-crc: Multithreaded CRC computation. 
