@@ -19,7 +19,7 @@ under multiple headings).
 ===================
 C
 ====================
-* multi-thread-crc: Multithreaded CRC computation. 
+* multithread-crc: Multithreaded CRC computation. 
 
 ====================
 MATLAB
