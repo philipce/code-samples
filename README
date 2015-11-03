@@ -21,6 +21,11 @@ C
 ====================
 * multithread-crc: Multithreaded CRC computation. 
 
+===================
+Java
+====================
+* avl-tree: Self-balancing binary search tree and visualization GUI. 
+
 ====================
 MATLAB
 ====================
