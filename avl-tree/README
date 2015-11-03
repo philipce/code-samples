@@ -2,7 +2,7 @@ This project implements a self-balancing binary search tree, specifically
 an AVL tree. In addition, a GUI is provided that allows the user to add or
 remove words from a tree and visualize how the tree structure changes.
 
-Detailed documentation on the AVL implementation is provided in the 
+Detailed documentation on the AVL tree implementation is provided in the 
 Javadoc (see doc/index.html).
 
 The GUI is fairly straightforward--words are entered in the text field, 
