@@ -16,20 +16,23 @@ noted in the documentatino. Below is a brief overview of the projects,
 organized by language (projects written in multiple languages are listed
 under multiple headings).
 
-===================
+====================
 C
 ====================
 * multithread-crc: Multithreaded CRC computation. 
 
-===================
+
+====================
 Java
 ====================
 * avl-tree: Self-balancing binary search tree and visualization GUI. 
+
 
 ====================
 MATLAB
 ====================
 * kalman-filter: Kalman filter for 2D projectile tracking.
+
 
 ====================
 Python
