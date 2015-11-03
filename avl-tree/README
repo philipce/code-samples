@@ -1,0 +1,12 @@
+This project implements a self-balancing binary search tree, specifically an AVL tree. In addition,
+a GUI is provided that allows the user to add or remove words from a tree and visualize how the tree
+structure changes.
+
+Detailed documentation is provided in the Javadoc (see doc/index.html).
+
+The GUI can be launched by running the Main class as shown below.
+
+    Example:
+                avl-tree$ mkdir bin
+                avl-tree$ javac src/pcepkg/avl/*.java -d ./bin
+                avl-tree$ java -cp ./bin pcepkg.avl.Main
