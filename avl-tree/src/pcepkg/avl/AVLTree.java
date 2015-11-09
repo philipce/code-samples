@@ -305,6 +305,7 @@ public class AVLTree<E extends Comparable<E>> implements Set<E>
     private Node rotateDR(Node k3)
     {
         k3.setLeftChild(rotateSL(k3.getLeftChild()));
+        
         return rotateSR(k3);
     }
 
@@ -411,6 +412,7 @@ public class AVLTree<E extends Comparable<E>> implements Set<E>
         if (n == null)
         {
             n = new Node(newData);
+            
             return n;
         }
 
