@@ -39,3 +39,4 @@ Python
 ====================
 * decision-tree: Decision tree for binary classification. 
 * maze-search: Various search algorithms used to solve 2D mazes. 
+* svm-classifier: Support Vector Machine with multithreaded cross-validation.
