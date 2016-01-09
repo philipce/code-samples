@@ -31,6 +31,7 @@ Java
 ====================
 MATLAB
 ====================
+* gp-terrain: Gaussian processes for modeling terrain.
 * kalman-filter: Kalman filter for 2D projectile tracking.
 
 
