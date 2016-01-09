@@ -1,0 +1,12 @@
+This project uses Gaussian process methods to perform regression for 
+the modeling of a point cloud. The dataset utilized is of elevation
+readings taken by satellite. While the original dataset is quite dense,
+the goal is to use relatively few sample points in creating a surface
+that closely approximates the actual data. Both the full data set and
+the model surface are shown, as well as the model uncertainty about its
+prediction. Typically, the actual and predicted data match quite closely, 
+though due to the non-determinism inherent in the method, some trials are
+better than others. User defined parameters are set to good defaults, but
+tweaking them can change the results significantly, for better or worse.
+
+The project can be executed by running the main.m script in MATLAB.
