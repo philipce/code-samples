@@ -1,10 +1,12 @@
-This modules defines and uses a support vector machine to perform binary classification. Input data 
-may be of arbitrary dimension. Output labels are either +1 or -1. This module also contains code to 
-perform k-fold cross validation across multiple cores.
+This modules defines and uses a support vector machine to perform binary 
+classification. Input data may be of arbitrary dimension. Output labels 
+are either +1 or -1. This module also contains code to perform k-fold 
+cross validation across multiple cores.
 
-An example of the classifier can be run, by providing data dimension and paths to files containing 
-test and training sets. A fifth argument can be provided to add a constant bias to the input data.
-See the function readFile for details on determining the data dimension and adding a bias.
+An example of the classifier can be run, by providing data dimension and 
+paths to files containing test and training sets.  A fifth argument can 
+be provided to add a constant bias to the input data. A couple of data 
+sets are included.
 
     Example:
     
