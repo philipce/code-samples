@@ -6,11 +6,16 @@ may be of arbitrary dimension. Output labels are either +1 or -1. This module al
 perform k-fold cross validation across multiple cores.
 
 An example of the classifier can be run, by providing data dimension and paths to files containing 
-test and training sets.
+test and training sets. A fifth argument can be provided to add a constant bias to the input data.
+See the function readFile for details on determining the data dimension and adding a bias.
 
     Example:
     
-        $ ./classifier.py 10 ./data0/train ./data0/test
+        $ ./classifier.py 11 ./data0/train ./data0/test
+        
+            OR
+            
+        $ ./classifier.py 5 ./astro/scaled/train ./astro/scaled/test 1
 """
 
 from __future__ import division # force floating point division
@@ -28,8 +33,8 @@ def main():
     Provides an example of how to use the classifier functions to perform inference on data.
     """
 
-    if len(sys.argv) != 4:
-        print 'Usage: classifier.py data_dimension train_set_path test_set_path'; 
+    if len(sys.argv) < 4 or len(sys.argv) > 5:
+        print 'Usage: classifier.py data_dimension train_set_path test_set_path [option: add_bias]'; 
         return;       
 
     # create sets of possible hyperparameter values
@@ -41,13 +46,15 @@ def main():
     dataDim = int(sys.argv[1]);
     trainPath = str(sys.argv[2]);
     testPath = str(sys.argv[3]);
-    c = Classifier('svm', hyperparams, dataDim, testPath, trainPath);
+    if len(sys.argv) == 5:
+        c = Classifier('svm', hyperparams, dataDim, testPath, trainPath, addBias=True);
+    else:
+        c = Classifier('svm', hyperparams, dataDim, testPath, trainPath);
     
     print 'Classifier type: ', c.type, \
           '\nTraining set: ', trainPath, \
           '\nTest set: ', testPath;
            
-    
     print 'Determining hyperparameters to use...';
     c.learnHyperparams(report=1);
     
@@ -94,7 +101,7 @@ class Classifier:
     ClassifierType = enum.Enum('ClassifierType', 'SVM PERCEPTRON KNN DECISIONTREE');
     
     
-    def __init__(self, classifierType, hyperparams, dimension, trainSetFilePath, testSetFilePath):
+    def __init__(self, classifierType, hyperparams, dimension, trainPath, testPath, addBias=False):
         """
         Construct new classifier object.
         
@@ -102,8 +109,8 @@ class Classifier:
         - classifierType (ClassifierType): type of classifier to create
         - hyperparams (list of sets): list contains a set of possible values for each hyperparameter
         - dimension (int): data dimension
-        - trainSetFilePath (string): file path to train set
-        - testSetFilePath (string): file path to test set
+        - trainPath (string): file path to train set
+        - testPath (string): file path to test set
         """
     
         # set classifier type
@@ -122,8 +129,8 @@ class Classifier:
         
         # read in train and test data
         self.D = dimension;
-        self.trainSet = self.readFile(trainSetFilePath, dimension);
-        self.testSet = self.readFile(testSetFilePath, dimension);             
+        self.trainSet = self.readFile(trainPath, dimension, addBias);
+        self.testSet = self.readFile(testPath, dimension, addBias);             
          
             
     def learnHyperparams(self, report=None):
@@ -150,7 +157,7 @@ class Classifier:
         - theta (float list): values for hyperparameters
         
         Returns:
-        - w (ndarray): weight vector, where w[0] corresponds to bias term
+        - w (ndarray): weight vector
         """
         
         setW = False;
@@ -180,7 +187,7 @@ class Classifier:
         results will be returned but not saved (useful for cross validation).
         
         Parameters:
-        - w (ndarray): weight vector, where w[0] corresponds to bias term
+        - w (ndarray): weight vector
         - testSet (list of tuples): data for testing
         
         Returns:
@@ -224,26 +231,32 @@ class Classifier:
             raise NotImplementedError("Only SVM is currently supported");      
         
         
-    def readFile(self, fileName, d, biasIndex=None):
+    def readFile(self, fileName, d, addBias=False):
         """
         Reads values from a specified file in libSVM format into a input vector and output value.
         
         For example, a 3D feature vector with a leading bias term and a positive label could be
-                +1 0:1 1:0.575 2:0.705 3:0.995
-                
-        The bias term need not be given explicitly, in which case the biasIndex parameter ought to
-        be used to set the corresponding element of the data point to 1.
+                +1 0:1 1:0.575 2:0.705 3:0.995                        
+                                
+        The bias term need not be given explicitly, in which case the addBias parameter ought to be 
+        set to true, to add a 1 as the final element of the data point.
         
         Note also that elements not explicitly given a value (e.g. above element 3 is .995) are set
-        to zero, hence the parameter d must be used to specify the data dimension.
+        to zero, hence the parameter d must be used to specify the data dimension (d should indicate
+        the dimensionality of the data points in the file; if a bias is explicit in the file then it 
+        should be included in d).
+        
+        NB: It is assumed that data vectors are zero indexed! Hence the point:
+                +1 1:0.575 2:0.705 3:0.995
+        would be considered 4-dimensional, with an implied value of 0 at index 0.
         
         Labels must be either +1 or -1. Files containing 1 or 0 will have labels converted.
 
         Parameters:
         - fileName (string): path to file to read
-        - d (int): data point dimension, i.e. number of features (not including bias)
-        - biasIndex (int): if not None, make the biasIndex-th element of the data point a constant 
-          bias with value of 1
+        - d (int): data point dimension, i.e. number of features (including explicit bias)
+        - addBias (boolean): if true, add a final element to the data point of constant 1 bias (in
+          this case, dimensionality d will be increased by 1 to accomodate a new bias term)
           
         Returns:
         - dataSet (list of tuples): list of tuples representing a data point and corresponding 
@@ -264,12 +277,14 @@ class Classifier:
                 label = -1;   
             
             # create ndarray for data point with bias
-            fVector = np.zeros(d+1);
+            if addBias:
+                fVector = np.zeros(d+1);
+                fVector[-1] = 1;
+            else:
+                fVector = np.zeros(d);
             for i in range(1,len(dataPt)):                               
                 fIndex, fVal =  dataPt[i].split(':');
                 fVector[int(fIndex)] = float(fVal);
-            if not (biasIndex == None):
-                fVector[biasIndex] = 1;
                 
             # add data point and label to data set
             dataSet.append((fVector,label));
@@ -422,7 +437,7 @@ def trainSVM(dataSet, epochs, C, rho):
     - rho (float): hyperparameter for initial learning rate
       
     Returns:
-    - w (ndarray): weight vector, where w[0] corresponds to bias term
+    - w (ndarray): weight vector
     """
     
     D = len(dataSet[0][0]);
