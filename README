@@ -4,9 +4,16 @@ project can be found in its respective README. Below is a brief overview
 of the projects, organized by language.
 
 ====================
+Assembly
+====================
+* yak-rtos: Real-time operating system for the x86 architecture. 
+
+
+====================
 C
 ====================
 * multithread-crc: Multithreaded CRC computation. 
+* yak-rtos: Real-time operating system for the x86 architecture. 
 
 
 ====================
