@@ -1,4 +1,0 @@
-This project implements a simple preemptive real-time operating system.
-The RTOS includes queues and semaphores. It's written for the 8086 chip
-and requires the c86 compiler. Also included in the project is a sample
-application. All code is mine except clib.
