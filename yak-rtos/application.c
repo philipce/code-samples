@@ -84,7 +84,7 @@ void BTask(void) // saturates the CPU for 5 ticks
     {
         YKDelayTask(2);
         
-        if (GlobalFlag == 1) // flag set -- loop for 5 ticks 
+        if (GlobalFlag == 1) // flag set--loop for 5 ticks 
         {                           
             YKEnterMutex();
             busycount = YKTickNum;
